@@ -1,0 +1,15 @@
+{
+  "name": "typescript_express_ddd",
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "uuid": "^13.0.0"
+  }
+}
