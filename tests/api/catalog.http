@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000
-@productId = a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+@productId = f9184905-2f26-4e2c-8fb6-f2afbc6a1445
 
 ### 1. Crear Producto (Command - Write Side)
 # Esto va al Repositorio de Postgres -> Guarda Evento -> Worker -> Proyección

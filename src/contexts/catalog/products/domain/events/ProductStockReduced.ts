@@ -5,16 +5,34 @@ export class ProductStockReduced extends DomainEvent {
 
   constructor(
     aggregateId: string,
-    public readonly amountReduced: number,
-    public readonly newStockLevel: number
+    public readonly quantity: number,
+    public readonly newStock: number,
+    eventId?: string,
+    occurredOn?: Date
   ) {
-    super(ProductStockReduced.EVENT_NAME, aggregateId);
+    super(ProductStockReduced.EVENT_NAME, aggregateId, eventId, occurredOn);
   }
 
   toPrimitives(): Object {
     return {
-      amountReduced: this.amountReduced,
-      newStockLevel: this.newStockLevel,
+      quantity: this.quantity,
+      newStock: this.newStock,
     };
+  }
+
+  static fromPrimitives(params: {
+    aggregateId: string;
+    attributes: any;
+    eventId: string;
+    occurredOn: Date;
+  }): DomainEvent {
+    const { aggregateId, attributes, eventId, occurredOn } = params;
+    return new ProductStockReduced(
+      aggregateId,
+      attributes.quantity,
+      attributes.newStock,
+      eventId,
+      occurredOn
+    );
   }
 }

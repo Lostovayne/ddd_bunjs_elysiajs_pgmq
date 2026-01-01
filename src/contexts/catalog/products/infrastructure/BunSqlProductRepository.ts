@@ -4,7 +4,6 @@ import { Product } from "../domain/Product";
 import { Price } from "../domain/Price";
 
 export class BunSqlProductRepository implements ProductRepository {
-  // Inyectamos la clase SQL nativa de Bun
   constructor(private readonly db: SQL) {}
 
   async save(product: Product): Promise<void> {

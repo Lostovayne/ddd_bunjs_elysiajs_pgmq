@@ -1,9 +1,13 @@
+import type { EventBus } from "@/contexts/shared/domain/bus/event/EventBus";
 import { Price } from "../domain/Price";
 import { Product } from "../domain/Product";
 import type { ProductRepository } from "../domain/ProductRepository";
 
 export class CreateProduct {
-  constructor(private readonly repository: ProductRepository) {}
+  constructor(
+    private readonly repository: ProductRepository,
+    private readonly eventBus: EventBus
+  ) {}
 
   async execute(
     id: string,
@@ -19,10 +23,6 @@ export class CreateProduct {
     // Mi Persistencia
     await this.repository.save(product);
 
-    // 4. (Futuro) Publicación de Eventos
-    // Aquí es donde haríamos:
-    // const events = product.pullDomainEvents();
-    // this.eventBus.publish(events);
-    // Pero como todavía no has implementado el EventBus, lo dejamos pendiente.
+    await this.eventBus.publish(product.pullDomainEvents());
   }
 }

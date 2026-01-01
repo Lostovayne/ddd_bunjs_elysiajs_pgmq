@@ -2,8 +2,8 @@
   "name": "typescript_express_ddd",
   "module": "index.ts",
   "scripts": {
-    "dev":"bun run --watch src/app/api/server.ts",
-    "migrate":"bun run src/app/database/migrate.ts"
+    "dev": "bun run --watch src/app/api/server.ts",
+    "migrate": "bun run src/app/database/migrate.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -14,6 +14,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@types/uuid": "^11.0.0",
     "elysia": "^1.4.19",
     "uuid": "^13.0.0"
   }
