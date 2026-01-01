@@ -21,6 +21,13 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@shared/*": ["src/shared/*"]
+    },
+
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,

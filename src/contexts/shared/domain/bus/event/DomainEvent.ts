@@ -10,7 +10,7 @@ export abstract class DomainEvent {
     eventName: string,
     aggregateId: string,
     eventId?: string,
-    occurredOn?: Date,
+    occurredOn?: Date
   ) {
     this.aggregateId = aggregateId;
     this.eventId = eventId || uuid();
@@ -21,3 +21,9 @@ export abstract class DomainEvent {
   // Método abstracto para que cada evento defina cómo convertirse a primitivos (útil para enviarlo a RabbitMQ/Kafka después)
   abstract toPrimitives(): Object;
 }
+
+export type DomainEventClass = {
+  EVENT_NAME: string;
+  fromPrimitives(params: any): DomainEvent;
+  new (...args: any[]): DomainEvent;
+};

@@ -1,0 +1,20 @@
+@baseUrl = http://localhost:3000
+@productId = a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+
+### 1. Crear Producto (Command - Write Side)
+# Esto va al Repositorio de Postgres -> Guarda Evento -> Worker -> Proyección
+PUT {{baseUrl}}/products/{{productId}}
+Content-Type: application/json
+
+{
+  "name": "Teclado Mecánico Keychron Q1",
+  "priceAmount": 15999,
+  "priceCurrency": "USD",
+  "stock": 10
+}
+
+### 2. Obtener Producto (Query - Read Side)
+# Esto va al Repositorio de Vista -> Lee de products_catalog_view
+# Si esto falla, tu Worker está muerto.
+GET {{baseUrl}}/products/{{productId}}
+Content-Type: application/json
