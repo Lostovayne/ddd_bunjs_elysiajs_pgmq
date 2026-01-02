@@ -30,8 +30,9 @@ export class DomainEventWorker {
       } catch (error) {
         console.error("🔥 Error crítico en worker:", error);
       }
-      // Polling cada 1 segundo (en producción usarías LISTEN/NOTIFY para ser más rápido)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Polling cada 5 segundos para reducir carga en BD
+      // (en producción usa LISTEN/NOTIFY de Postgres para ser más eficiente)
+      await new Promise((resolve) => setTimeout(resolve, 5000));
     }
   }
 
@@ -49,7 +50,8 @@ export class DomainEventWorker {
 
     for (const row of events) {
       const eventName = row.type;
-      const attributes = row.body;
+      // ¡PARSEA EL PUTO JSON! El campo body es JSONB y viene como string
+      const attributes = typeof row.body === "string" ? JSON.parse(row.body) : row.body;
       const { id: eventId, aggregate_id: aggregateId, occurred_on: occurredOn } = row;
 
       const handlers = this.subscribers.get(eventName);

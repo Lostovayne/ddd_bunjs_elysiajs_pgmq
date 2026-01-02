@@ -23,7 +23,7 @@ export class Customer extends AggregateRoot {
   toPrimitives() {
     return {
       id: this.id.value,
-      name: this.name,
+      name: this.name.value,
       email: this.email.value,
     };
   }

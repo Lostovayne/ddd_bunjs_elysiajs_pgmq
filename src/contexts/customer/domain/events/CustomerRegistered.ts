@@ -13,7 +13,20 @@ export class CustomerRegistered extends DomainEvent {
     super(CustomerRegistered.EVENT_NAME, aggregateId, eventId, occurredOn);
   }
 
-  override toPrimitives(): Object {
-    throw new Error("Method not implemented.");
+  toPrimitives(): Object {
+    return {
+      name: this.name,
+      email: this.email,
+    };
+  }
+
+  static fromPrimitives(params: {
+    aggregateId: string;
+    attributes: any;
+    eventId: string;
+    occurredOn: Date;
+  }): DomainEvent {
+    const { aggregateId, attributes, eventId, occurredOn } = params;
+    return new CustomerRegistered(aggregateId, attributes.name, attributes.email, eventId, occurredOn);
   }
 }
